@@ -150,7 +150,7 @@ export default function SurveyEditor({ initialData, surveyId, isEditing = false 
     return (
         <form onSubmit={handleSubmit} className={styles.container}>
             <div className={styles.section}>
-                <h2 className={styles.sectionTitle}>基本情報 (v5)</h2>
+                <h2 className={styles.sectionTitle}>【正式版】従業員アンケート調査システム</h2>
                 <div className={styles.field}>
                     <label className={styles.label}>アンケートタイトル <span className={styles.required}>*</span></label>
                     <input
