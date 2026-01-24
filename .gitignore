@@ -34,4 +34,8 @@ next-env.d.ts
 
 # User credentials (Important!)
 ver_key.txt
-*.json
+# *.json (Commented out to allow package.json etc. Be careful with credentials!)
+!package.json
+!package-lock.json
+!tsconfig.json
+!vercel.json
