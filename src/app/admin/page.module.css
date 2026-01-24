@@ -1,0 +1,137 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #1f2937;
+    margin: 0;
+}
+
+.actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.createButton {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    box-shadow: 0 4px 6px -1px rgba(102, 126, 234, 0.4);
+    transition: all 0.2s;
+}
+
+.createButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px -1px rgba(102, 126, 234, 0.5);
+}
+
+.settingsButton {
+    background: white;
+    color: #4b5563;
+    padding: 0.75rem 1.5rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.settingsButton:hover {
+    background: #f9fafb;
+}
+
+.tableCard {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th {
+    background: #f9fafb;
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+    color: #374151;
+    border-bottom: 2px solid #e5e7eb;
+}
+
+.table td {
+    padding: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+    color: #4b5563;
+}
+
+.table tr:last-child td {
+    border-bottom: none;
+}
+
+.table tr:hover {
+    background: #f9fafb;
+}
+
+.status {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.active {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.inactive {
+    background: #f3f4f6;
+    color: #6b7280;
+}
+
+.surveyTitle a {
+    font-weight: 600;
+    color: #1f2937;
+    text-decoration: none;
+}
+
+.surveyTitle a:hover {
+    color: #667eea;
+    text-decoration: underline;
+}
+
+.rowActions {
+    display: flex;
+    gap: 1rem;
+}
+
+.actionLink {
+    color: #667eea;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.actionLink:hover {
+    text-decoration: underline;
+}
+
+.empty {
+    text-align: center;
+    padding: 3rem;
+    color: #9ca3af;
+}
