@@ -9,13 +9,11 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "chart.js": "^4.5.1",
     "csv-stringify": "^6.6.0",
     "dotenv": "^17.2.3",
     "googleapis": "^170.1.0",
     "next": "16.1.2",
     "react": "19.2.3",
-    "react-chartjs-2": "^5.3.1",
     "react-dom": "19.2.3"
   },
   "devDependencies": {
