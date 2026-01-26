@@ -5,7 +5,8 @@ import styles from './page.module.css';
 export const revalidate = 0;
 
 export default async function AdminDashboard() {
-    const surveys = await getSurveys();
+    const allSurveys = await getSurveys();
+    const surveys = allSurveys.filter(s => s.isActive);
 
     return (
         <div className={styles.container}>
