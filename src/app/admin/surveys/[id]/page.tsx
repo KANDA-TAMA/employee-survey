@@ -1,7 +1,9 @@
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getSurveyById, getResponses } from '@/lib/googleSheets';
 import ResponseTable from '@/components/ResponseTable';
 import SurveyEditor from '@/components/SurveyEditor';
+import SurveyCharts from '@/components/SurveyCharts';
 import styles from './page.module.css';
 
 interface PageProps {
@@ -27,9 +29,9 @@ export default async function SurveyDetailPage({ params, searchParams }: PagePro
             <div className={styles.container}>
                 <div className={styles.header}>
                     <h1 className={styles.title}>アンケート編集: {survey.title}</h1>
-                    <a href={`/admin/surveys/${id}`} className={styles.backLink}>
+                    <Link href={`/admin/surveys/${id}`} className={styles.backLink}>
                         ← 詳細に戻る
-                    </a>
+                    </Link>
                 </div>
                 <SurveyEditor initialData={survey} surveyId={id} isEditing />
             </div>
@@ -53,14 +55,16 @@ export default async function SurveyDetailPage({ params, searchParams }: PagePro
                 </div>
 
                 <div className={styles.actions}>
-                    <a href={`/admin/surveys/${id}?mode=edit`} className={styles.editButton}>
+                    <Link href={`/admin/surveys/${id}?mode=edit`} className={styles.editButton}>
                         ✏️ 編集する
-                    </a>
+                    </Link>
                     <a href={`/survey/${survey.id}`} target="_blank" className={styles.previewButton}>
                         🔗 プレビュー
                     </a>
                 </div>
             </div>
+
+            <SurveyCharts survey={survey} responses={responses} />
 
             <div className={styles.section}>
                 <h2 className={styles.sectionTitle}>回答結果一覧</h2>
