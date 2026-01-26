@@ -147,6 +147,30 @@ export default function SurveyEditor({ initialData, surveyId, isEditing = false 
         }
     };
 
+    const handleDelete = async () => {
+        if (!confirm('本当に削除しますか？データは復元できません')) return;
+
+        setIsSubmitting(true);
+        setError(null);
+
+        try {
+            const res = await fetch(`/api/surveys?id=${surveyId}`, {
+                method: 'DELETE',
+            });
+
+            if (!res.ok) {
+                throw new Error('Failed to delete survey');
+            }
+
+            router.push('/admin');
+            router.refresh();
+        } catch (err) {
+            console.error('Delete Error:', err);
+            setError('削除に失敗しました');
+            setIsSubmitting(false);
+        }
+    };
+
     return (
         <form onSubmit={handleSubmit} className={styles.container}>
             <div className={styles.section}>
@@ -262,6 +286,11 @@ export default function SurveyEditor({ initialData, surveyId, isEditing = false 
             {error && <div className={styles.error}>{error}</div>}
 
             <div className={styles.actions}>
+                {isEditing && (
+                    <button type="button" onClick={handleDelete} disabled={isSubmitting} className={styles.dangerButton}>
+                        アンケートを削除
+                    </button>
+                )}
                 <button type="button" onClick={() => router.back()} className={styles.cancelButton}>
                     キャンセル
                 </button>

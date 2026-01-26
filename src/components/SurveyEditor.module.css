@@ -289,3 +289,25 @@
     cursor: not-allowed;
     transform: none;
 }
+
+.dangerButton {
+    /* Button base styles inline */
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    /* Danger styles */
+    background: #fee2e2;
+    border: 1px solid #fecaca;
+    color: #dc2626;
+    margin-right: auto;
+}
+
+.dangerButton:hover {
+    background: #fecaca;
+    border-color: #f87171;
+    color: #b91c1c;
+}
