@@ -79,6 +79,9 @@ export default function SurveyCharts({ survey, responses }: SurveyChartsProps) {
                 {chartableQuestions.map(question => {
                     const chartData = getChartDataForQuestion(question.id, question.type, question.options);
                     const maxCount = Math.max(...chartData.map(d => d.count), 1);
+                    const respondentsToQuestion = responses.filter(r =>
+                        r.answers.some(a => a.questionId === question.id && a.value !== undefined && a.value !== null && a.value !== '')
+                    ).length;
 
                     return (
                         <div key={question.id} className={styles.chartCard}>
@@ -99,7 +102,7 @@ export default function SurveyCharts({ survey, responses }: SurveyChartsProps) {
                                         <div className={styles.barValue}>
                                             {data.count}
                                             <span className={styles.percentage}>
-                                                ({totalResponses > 0 ? Math.round((data.count / totalResponses) * 100) : 0}%)
+                                                ({respondentsToQuestion > 0 ? Math.round((data.count / respondentsToQuestion) * 100) : 0}%)
                                             </span>
                                         </div>
                                     </div>

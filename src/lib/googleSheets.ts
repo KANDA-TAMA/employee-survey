@@ -59,10 +59,15 @@ export async function getSurveys(): Promise<Survey[]> {
     try {
         const response = await sheets.spreadsheets.values.get({
             spreadsheetId: SPREADSHEET_ID,
-            range: `${SHEETS.SURVEYS}!A2:H`,
+            range: `${SHEETS.SURVEYS}!A:H`,
         });
 
-        const rows = response.data.values || [];
+        const allRows = response.data.values || [];
+        // Skip header row if present
+        const rows = allRows.length > 0 && (allRows[0][0] === 'id' || allRows[0][0] === 'ID')
+            ? allRows.slice(1)
+            : allRows;
+
         return rows.map((row) => ({
             id: row[0] || '',
             title: row[1] || '',
@@ -164,10 +169,15 @@ export async function getResponses(surveyId?: string): Promise<Response[]> {
     try {
         const response = await sheets.spreadsheets.values.get({
             spreadsheetId: SPREADSHEET_ID,
-            range: `${SHEETS.RESPONSES}!A2:E`,
+            range: `${SHEETS.RESPONSES}!A:E`,
         });
 
-        const rows = response.data.values || [];
+        const allRows = response.data.values || [];
+        // Skip header row if present
+        const rows = allRows.length > 0 && (allRows[0][0] === 'id' || allRows[0][0] === 'ID')
+            ? allRows.slice(1)
+            : allRows;
+
         const responses = rows.map((row) => ({
             id: row[0] || '',
             surveyId: row[1] || '',
@@ -224,10 +234,16 @@ export async function getSettings(): Promise<OrganizationSettings> {
     try {
         const response = await sheets.spreadsheets.values.get({
             spreadsheetId: SPREADSHEET_ID,
-            range: `${SHEETS.SETTINGS}!A2:B2`,
+            range: `${SHEETS.SETTINGS}!A:B`,
         });
 
-        const row = response.data.values?.[0];
+        const allRows = response.data.values || [];
+        // Skip header row if present
+        const rows = allRows.length > 0 && (allRows[0][0] === 'name' || allRows[0][0] === 'Name')
+            ? allRows.slice(1)
+            : allRows;
+
+        const row = rows[0];
         if (row) {
             return {
                 name: row[0] || '',
