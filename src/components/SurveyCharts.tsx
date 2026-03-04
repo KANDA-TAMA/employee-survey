@@ -70,8 +70,6 @@ export default function SurveyCharts({ survey, responses }: SurveyChartsProps) {
         return null;
     }
 
-    const totalResponses = responses.length;
-
     return (
         <div className={styles.container}>
             <h2 className={styles.title}>📊 集計結果</h2>
@@ -79,9 +77,8 @@ export default function SurveyCharts({ survey, responses }: SurveyChartsProps) {
                 {chartableQuestions.map(question => {
                     const chartData = getChartDataForQuestion(question.id, question.type, question.options);
                     const maxCount = Math.max(...chartData.map(d => d.count), 1);
-                    const respondentsToQuestion = responses.filter(r =>
-                        r.answers.some(a => a.questionId === question.id && a.value !== undefined && a.value !== null && a.value !== '')
-                    ).length;
+                    // その質問への選択総数（単一選択＝回答者数、複数選択＝選択数の合計）を分母にし、合計100%になるようにする
+                    const totalSelections = chartData.reduce((sum, d) => sum + d.count, 0);
 
                     return (
                         <div key={question.id} className={styles.chartCard}>
@@ -102,7 +99,7 @@ export default function SurveyCharts({ survey, responses }: SurveyChartsProps) {
                                         <div className={styles.barValue}>
                                             {data.count}
                                             <span className={styles.percentage}>
-                                                ({respondentsToQuestion > 0 ? Math.round((data.count / respondentsToQuestion) * 100) : 0}%)
+                                                ({totalSelections > 0 ? (data.count / totalSelections * 100).toFixed(1) : 0}%)
                                             </span>
                                         </div>
                                     </div>
